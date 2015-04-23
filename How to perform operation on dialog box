@@ -1,0 +1,43 @@
+package APIDemos;
+
+import io.appium.java_client.android.AndroidDriver;
+
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+public class DialogBoxEx 
+{
+	public static void main(String[] args) 
+	{
+		AndroidDriver driver=null;
+		DesiredCapabilities capabilities=new DesiredCapabilities();
+		capabilities.setCapability("deviceName", "Testing");
+		capabilities.setCapability("appPackage", "io.appium.android.apis");
+		capabilities.setCapability("appActivity", "ApiDemos");
+		
+		try
+		{
+			driver=new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		//Click on app
+		driver.findElementByAndroidUIAutomator("text(\"App\")").click();
+		
+		//Click on Alert Dialogs
+		driver.findElementByAndroidUIAutomator("text(\"Alert Dialogs\")").click();
+		
+		//click on Ok Cancel with a message
+		driver.findElementByAndroidUIAutomator("resourceId(\"io.appium.android.apis:id/two_buttons\")").click();
+		
+		//Click on OK button in the Dialog box
+		driver.findElementByAndroidUIAutomator("text(\"OK\")").click();
+	}
+
+}
